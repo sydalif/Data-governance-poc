@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head><title>Data Governance Info</title></head>
+<head>
+  <title>Data Governance for Business Registration</title>
+</head>
 <body>
-  <h2>Hi, <span id="name"></span></h2>
-  <p>
-    Here's our annual data governance training content. Please read carefully before taking the quiz.
-  </p>
+  <h2>Welcome, <span id="name"></span></h2>
 
-  <button onclick="goToQuiz()">Continue to Quiz</button>
+  <h3>Annual Data Governance Briefing (Singapore Public Agency)</h3>
+  <p>
+    As an agency responsible for the registration and regulation of businesses in Singapore, we are entrusted with handling sensitive personal and commercial information.
+    <br><br>
+    Data governance ensures we manage, protect, and use this data ethically, securely, and lawfully, in accordance with the **Public Sector (Governance) Act**, **PDPA**, and internal policies.
+  </p>
+  <ul>
+    <li>Ensure accurate, complete and timely recording of registration data</li>
+    <li>Respect data confidentiality and prevent unauthorized sharing</li>
+    <li>Report data breaches or suspicious access immediately</li>
+    <li>Only access records that are necessary for your role</li>
+  </ul>
+
+  <p>Click below to begin the annual quiz.</p>
+  <button onclick="goToQuiz()">Start Quiz</button>
 
   <script>
     document.getElementById('name').textContent = localStorage.getItem('username');
