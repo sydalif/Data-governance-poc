@@ -1,29 +1,169 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Data Governance for Business Registration</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Data Governance Briefing - DAMA-DMBOK Overview</title>
+  <style>
+    /* Base and layout */
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0 20px 40px;
+      background: #f8f9fa;
+      color: #1a1a1a;
+      line-height: 1.6;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1, h2, h3 {
+      color: #003366;
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+    }
+    h1 {
+      font-size: 2.2rem;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    p {
+      font-size: 1rem;
+      margin-bottom: 1em;
+    }
+    ul {
+      margin-left: 1.5em;
+      margin-bottom: 1em;
+    }
+    blockquote {
+      margin-left: 0;
+      margin-right: 0;
+      font-style: italic;
+      color: #4a4a4a;
+      border-left: 5px solid #003366;
+      padding-left: 15px;
+      background-color: #e9f0f7;
+      margin-bottom: 1.5em;
+    }
+    section {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+      padding: 25px 30px;
+      margin-bottom: 30px;
+    }
+    button {
+      display: block;
+      background-color: #003366;
+      color: white;
+      border: none;
+      padding: 14px 30px;
+      font-size: 1.1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 40px auto 20px;
+      width: 200px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #002244;
+    }
+    #name {
+      color: #0055a5;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      body {
+        padding: 15px 15px 30px;
+      }
+      button {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h2>Welcome, <span id="name"></span></h2>
+  <h1>Welcome, <span id="name"></span></h1>
 
-  <h3>Annual Data Governance Briefing (Singapore Public Agency)</h3>
-  <p>
-    As an agency responsible for the registration and regulation of businesses in Singapore, we are entrusted with handling sensitive personal and commercial information.
-    <br><br>
-    Data governance ensures we manage, protect, and use this data ethically, securely, and lawfully, in accordance with the **Public Sector (Governance) Act**, **PDPA**, and internal policies.
-  </p>
-  <ul>
-    <li>Ensure accurate, complete and timely recording of registration data</li>
-    <li>Respect data confidentiality and prevent unauthorized sharing</li>
-    <li>Report data breaches or suspicious access immediately</li>
-    <li>Only access records that are necessary for your role</li>
-  </ul>
+  <section>
+    <h2>Annual Data Governance Briefing</h2>
+    <p>
+      This briefing provides an overview of key concepts from the <strong>DAMA-DMBOK (Data Management Body of Knowledge)</strong>,
+      with focus on areas critical to our agency's mission of administering business registration in Singapore. Understanding and applying these principles help us ensure data is accurate, secure, and effectively used to support our operations and uphold public trust.
+    </p>
+  </section>
 
-  <p>Click below to begin the annual quiz.</p>
+  <section>
+    <h2>Data Governance (General Knowledge)</h2>
+    <p>Data governance is the foundation for managing data assets across their lifecycle, establishing policies, roles, and responsibilities. In our agency, data governance means:</p>
+    <ul>
+      <li>Defining who is accountable for data quality and protection</li>
+      <li>Setting standards and procedures for data handling and sharing</li>
+      <li>Ensuring compliance with national laws like PDPA and agency policies</li>
+      <li>Enabling transparency and auditability of data activities</li>
+    </ul>
+    <blockquote>
+      "Effective data governance enables confident, timely decisions while safeguarding sensitive information."
+    </blockquote>
+  </section>
+
+  <section>
+    <h2>Data Quality</h2>
+    <p>High-quality data is essential for reliable business registration and government services. Data quality dimensions to focus on include:</p>
+    <ul>
+      <li><strong>Accuracy:</strong> Data correctly represents real-world facts, e.g., registered business addresses.</li>
+      <li><strong>Completeness:</strong> All necessary data fields are filled out, avoiding missing information that delays processing.</li>
+      <li><strong>Consistency:</strong> Data should be consistent across systems and time, preventing contradictory records.</li>
+      <li><strong>Timeliness:</strong> Data must be updated promptly to reflect current status, such as changes in business ownership.</li>
+    </ul>
+    <p>To maintain data quality, staff must follow procedures for data entry, validation, and correction, reporting anomalies when discovered.</p>
+  </section>
+
+  <section>
+    <h2>Data Protection</h2>
+    <p>Protecting sensitive personal and business data is mandated under the <strong>Personal Data Protection Act (PDPA)</strong>. Our responsibilities include:</p>
+    <ul>
+      <li>Restricting access to authorized personnel only</li>
+      <li>Using agency-approved secure systems for storage and transmission</li>
+      <li>Reporting data breaches immediately to the Data Protection Officer</li>
+      <li>Ensuring data is used only for legitimate purposes consistent with consent</li>
+      <li>Regularly reviewing data retention policies to dispose of data securely when no longer needed</li>
+    </ul>
+    <blockquote>
+      "Data protection safeguards not just information, but the agency's reputation and public trust."
+    </blockquote>
+  </section>
+
+  <section>
+    <h2>Data Access and Exploitation (Fusion)</h2>
+    <p>Controlled data access ensures that staff have the information they need to perform duties effectively, while respecting confidentiality.</p>
+    <p>Data exploitation and fusion refer to responsibly combining data from multiple sources to generate insights, such as cross-referencing business registrations with tax data to identify discrepancies.</p>
+    <ul>
+      <li>Access is granted on a need-to-know basis and regularly reviewed</li>
+      <li>Data fusion activities must comply with legal and ethical standards</li>
+      <li>Proper logging and auditing of data access protects against misuse</li>
+      <li>Data analytics helps improve operational efficiency and policy making</li>
+    </ul>
+    <p>Examples of exploitation include trend analysis for business sector growth or fraud detection.</p>
+  </section>
+
+  <section>
+    <h2>Key Staff Responsibilities</h2>
+    <ul>
+      <li>Maintain data integrity by following documented data management procedures</li>
+      <li>Adhere to agency and statutory policies on data protection and confidentiality</li>
+      <li>Report incidents or concerns about data handling promptly to supervisors or Data Protection Officer</li>
+      <li>Participate in annual training and quizzes to reinforce governance awareness</li>
+      <li>Use agency systems and channels exclusively for data management tasks</li>
+    </ul>
+  </section>
+
   <button onclick="goToQuiz()">Start Quiz</button>
 
   <script>
-    document.getElementById('name').textContent = localStorage.getItem('username');
+    document.getElementById('name').textContent = localStorage.getItem('username') || 'Staff Member';
     function goToQuiz() {
       window.location.href = "quiz.html";
     }
