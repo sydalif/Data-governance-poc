@@ -1,28 +1,87 @@
 <!DOCTYPE html>
 <html>
-<head><title>Quiz</title></head>
+<head>
+  <title>Data Governance Quiz</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .question { margin-bottom: 20px; }
+  </style>
+</head>
 <body>
-  <h2>Quiz: Data Governance</h2>
-  <form id="quizForm">
-    <p>1. What is data governance?</p>
-    <input type="radio" name="q1" value="a"> A tech product<br>
-    <input type="radio" name="q1" value="b"> A framework for managing data<br>
-    <input type="radio" name="q1" value="c"> None of the above<br><br>
-
-    <button type="button" onclick="submitQuiz()">Submit</button>
-  </form>
+  <h2>Data Governance Quiz</h2>
+  <form id="quizForm"></form>
+  <button onclick="submitQuiz()">Submit</button>
 
   <div id="result"></div>
+  <button id="retryBtn" onclick="loadQuiz()" style="display:none;">Retake Quiz</button>
 
   <script>
+    const questions = [
+      { q: "What is data governance?", a: "A framework for managing data", options: ["A data center", "A framework for managing data", "A type of software"] },
+      { q: "Which act governs public sector data in Singapore?", a: "Public Sector (Governance) Act", options: ["PDPA", "GDPR", "Public Sector (Governance) Act"] },
+      { q: "What should you do if you find a data breach?", a: "Report it immediately", options: ["Ignore it", "Fix it yourself", "Report it immediately"] },
+      { q: "Can you access data not related to your duties?", a: "No", options: ["Yes", "No", "Only during emergencies"] },
+      { q: "Why is data accuracy important?", a: "To ensure business registration data is reliable", options: ["To meet deadlines", "To reduce paper usage", "To ensure business registration data is reliable"] },
+      { q: "What is the PDPA?", a: "Personal Data Protection Act", options: ["Public Data Policy Act", "Personal Data Protection Act", "Public Department Privacy Agreement"] },
+      { q: "Is it acceptable to share business data over WhatsApp?", a: "No", options: ["Yes", "No", "Only with manager approval"] },
+      { q: "Who is responsible for data protection?", a: "Every staff member", options: ["IT Department", "Every staff member", "Only management"] },
+      { q: "How often should you complete governance training?", a: "Annually", options: ["Every 5 years", "Annually", "Never"] },
+      { q: "What does confidentiality mean?", a: "Not sharing sensitive data without authorization", options: ["Encrypting data", "Not sharing sensitive data without authorization", "Deleting data"] },
+      { q: "Where should you store sensitive business data?", a: "Secure agency-approved systems", options: ["On your phone", "In your email inbox", "Secure agency-approved systems"] },
+      { q: "Who enforces public sector data policies in SG?", a: "GovTech & PSD", options: ["IMDA", "GovTech & PSD", "Singtel"] },
+      { q: "How do you protect data integrity?", a: "By avoiding unauthorized edits", options: ["By backing it up", "By deleting old data", "By avoiding unauthorized edits"] },
+      { q: "When should access to data be reviewed?", a: "Periodically and when roles change", options: ["Only at audit", "Annually", "Periodically and when roles change"] },
+      { q: "Can you save business data on personal devices?", a: "No", options: ["Yes", "No", "If encrypted"] },
+    ];
+
+    let currentQuiz = [];
+
+    function loadQuiz() {
+      document.getElementById('result').innerText = '';
+      document.getElementById('retryBtn').style.display = 'none';
+
+      // Randomly pick 15 questions
+      currentQuiz = [...questions]
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 15);
+
+      const quizForm = document.getElementById('quizForm');
+      quizForm.innerHTML = '';
+
+      currentQuiz.forEach((q, i) => {
+        const block = document.createElement('div');
+        block.className = 'question';
+        block.innerHTML = `
+          <p>${i + 1}. ${q.q}</p>
+          ${q.options.map(opt =>
+            `<label><input type="radio" name="q${i}" value="${opt}"> ${opt}</label><br>`
+          ).join('')}
+        `;
+        quizForm.appendChild(block);
+      });
+    }
+
     function submitQuiz() {
-      const answer = document.querySelector('input[name="q1"]:checked')?.value;
-      if (answer === "b") {
-        document.getElementById("result").innerText = "Correct! ✅";
+      let score = 0;
+
+      currentQuiz.forEach((q, i) => {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        if (selected && selected.value === q.a) {
+          score++;
+        }
+      });
+
+      const result = document.getElementById('result');
+      if (score === 15) {
+        result.innerHTML = `✅ Congratulations! You scored 15/15 and passed the quiz.`;
       } else {
-        document.getElementById("result").innerText = "Incorrect ❌. Please review the material.";
+        result.innerHTML = `❌ You scored ${score}/15. You must retake the quiz to pass.`;
+        document.getElementById('retryBtn').style.display = 'inline';
       }
     }
+
+    // Load the quiz initially
+    loadQuiz();
   </script>
 </body>
 </html>
