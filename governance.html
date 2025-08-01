@@ -12,10 +12,18 @@
       padding: 30px;
       line-height: 1.6;
       background-color: #f9f9f9;
+      color: #333;
     }
 
     h1, h2 {
       color: #003366;
+    }
+
+    #greeting {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      text-align: center;
     }
 
     section {
@@ -31,12 +39,26 @@
       margin-left: 20px;
     }
 
-    a {
-      color: #003366;
+    button {
+      display: block;
+      margin: 30px auto;
+      background-color: #003366;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #00509e;
     }
   </style>
 </head>
 <body>
+
+  <div id="greeting">Welcome, User!</div>
 
   <h1>Annual Data Governance Training</h1>
 
@@ -123,6 +145,19 @@
     </ul>
     <p>Successful fusion enhances situational awareness and enables cross-agency collaboration, improving service delivery and regulatory oversight.</p>
   </section>
+
+  <button id="startQuizBtn">Proceed to Quiz</button>
+
+  <script>
+    // Show username from localStorage
+    const username = localStorage.getItem('username') || 'User';
+    document.getElementById('greeting').textContent = `Welcome, ${username}!`;
+
+    // Quiz button redirects to quiz.html
+    document.getElementById('startQuizBtn').addEventListener('click', () => {
+      window.location.href = 'quiz.html';  // Adjust if your quiz filename differs
+    });
+  </script>
 
 </body>
 </html>
