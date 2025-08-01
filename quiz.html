@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head><title>Quiz</title></head>
+<body>
+  <h2>Quiz: Data Governance</h2>
+  <form id="quizForm">
+    <p>1. What is data governance?</p>
+    <input type="radio" name="q1" value="a"> A tech product<br>
+    <input type="radio" name="q1" value="b"> A framework for managing data<br>
+    <input type="radio" name="q1" value="c"> None of the above<br><br>
+
+    <button type="button" onclick="submitQuiz()">Submit</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    function submitQuiz() {
+      const answer = document.querySelector('input[name="q1"]:checked')?.value;
+      if (answer === "b") {
+        document.getElementById("result").innerText = "Correct! ✅";
+      } else {
+        document.getElementById("result").innerText = "Incorrect ❌. Please review the material.";
+      }
+    }
+  </script>
+</body>
+</html>
