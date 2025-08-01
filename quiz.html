@@ -2,261 +2,208 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Data Governance Quiz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       max-width: 900px;
-      margin: 20px auto;
-      background: #f4f7fa;
-      padding: 20px;
+      margin: auto;
+      padding: 30px;
+      background-color: #f9f9f9;
     }
-
-    h1 {
+    h1, h2 {
       color: #003366;
-      text-align: center;
     }
-
-    form {
-      background: #fff;
-      padding: 25px 30px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-
     .question {
-      margin-bottom: 25px;
+      background: #fff;
+      padding: 20px;
+      margin: 20px 0;
+      border-left: 5px solid #003366;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-
-    .question h3 {
-      margin-bottom: 10px;
-      color: #004080;
+    .question.incorrect {
+      border-left: 5px solid red;
     }
-
-    label {
-      display: block;
-      margin-bottom: 6px;
-      cursor: pointer;
-    }
-
     button {
       background-color: #003366;
       color: white;
-      padding: 12px 25px;
       border: none;
-      border-radius: 5px;
+      padding: 12px 25px;
       font-size: 1rem;
+      border-radius: 5px;
       cursor: pointer;
       margin: 20px auto;
       display: block;
     }
-
-    .result {
-      background-color: #eef2f7;
-      border-left: 5px solid #003366;
-      padding: 10px 15px;
-      margin-top: 10px;
-      border-radius: 4px;
-    }
-
-    .incorrect {
-      border-left-color: #cc0000;
-      background-color: #fce9e9;
-    }
-
-    #certificate {
-      display: none;
-      margin-top: 30px;
-      background: #fff;
-      border: 2px solid #003366;
-      padding: 20px;
-      border-radius: 8px;
+    #result, #certificate, #reviewPrompt {
       text-align: center;
+      margin-top: 40px;
     }
-
-    #retakeBtn:disabled {
-      background-color: #cccccc;
-      cursor: not-allowed;
+    #certificate {
+      border: 2px dashed #003366;
+      padding: 30px;
+      margin-top: 30px;
+      background-color: #fff;
     }
-
-    #reviewLinks {
-      display: none;
-      background: #fff5e6;
-      border-left: 4px solid #ff9900;
-      padding: 15px;
-      margin-top: 20px;
-    }
-
-    a.review-topic {
+    label {
       display: block;
-      color: #003366;
-      margin: 6px 0;
-      text-decoration: underline;
+      margin: 5px 0;
     }
   </style>
 </head>
 <body>
 
-<h1>Annual Data Governance Quiz</h1>
+  <h1>Welcome to the Quiz</h1>
+  <div id="usernameDisplay"></div>
 
-<form id="quizForm">
-  <div id="questionsContainer">
-    <!-- Example question -->
-    <div class="question" data-topic="Data Governance" id="q1">
-      <h3>1. What is the purpose of data governance?</h3>
-      <label><input type="radio" name="q1" value="a"> To manage data via policies and responsibilities</label>
-      <label><input type="radio" name="q1" value="b"> To store as much data as possible</label>
-      <label><input type="radio" name="q1" value="c"> To allow unrestricted access</label>
-    </div>
+  <form id="quizForm"></form>
 
-    <div class="question" data-topic="Data Quality" id="q2">
-      <h3>2. Which of these are data quality dimensions? (Select all that apply)</h3>
-      <label><input type="checkbox" name="q2" value="accuracy"> Accuracy</label>
-      <label><input type="checkbox" name="q2" value="timeliness"> Timeliness</label>
-      <label><input type="checkbox" name="q2" value="reliability"> Reliability</label>
-      <label><input type="checkbox" name="q2" value="confusion"> Confusion</label>
-    </div>
+  <div id="result"></div>
+  <div id="reviewPrompt"></div>
+  <div id="certificate"></div>
 
-    <div class="question" data-topic="Data Protection" id="q3">
-      <h3>3. What does data protection focus on?</h3>
-      <label><input type="radio" name="q3" value="a"> Data visualization</label>
-      <label><input type="radio" name="q3" value="b"> Privacy and security</label>
-      <label><input type="radio" name="q3" value="c"> Hardware maintenance</label>
-    </div>
-
-    <!-- Add more base questions as needed -->
-  </div>
-
-  <button type="submit">Submit</button>
-</form>
-
-<div id="reviewLinks"></div>
-
-<button id="retakeBtn" onclick="location.reload()" disabled>Retake Quiz</button>
-
-<div id="certificate">
-  <h2>Annual Data Governance Training Acknowledgement</h2>
-  <p>This certifies that <strong id="certName">Staff Member</strong> has successfully passed the annual data governance training.</p>
-  <p>Date: <strong id="certDate"></strong></p>
-  <p>Agency: <strong>Business Registration Authority of Singapore</strong></p>
-</div>
-
-<script>
-  const correctAnswers = {
-    q1: "a",
-    q2: ["accuracy", "timeliness", "reliability"],
-    q3: "b"
-  };
-
-  const followUpQuestions = {
-    "Data Governance": {
-      id: "dg_followup",
-      html: `
-        <div class="question" data-topic="Data Governance" id="dg_followup">
-          <h3>Follow-up: What framework does DAMA advocate for data governance?</h3>
-          <label><input type="radio" name="dg_followup" value="a"> DAMA-DMBOK</label>
-          <label><input type="radio" name="dg_followup" value="b"> ISO 9001</label>
-          <label><input type="radio" name="dg_followup" value="c"> Agile</label>
-        </div>`
-    }
-  };
-
-  let reviewedTopics = new Set();
-  let requiredTopics = new Set();
-
-  // Prompt login name once
-  let username = localStorage.getItem("username");
-  if (!username) {
-    username = prompt("Enter your name for certificate:");
-    if (username) localStorage.setItem("username", username);
-  }
-
-  document.getElementById("quizForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    const form = e.target;
-    const questions = form.querySelectorAll(".question");
-    let allCorrect = true;
-    const addedFollowUps = new Set();
-    requiredTopics.clear();
-    reviewedTopics.clear();
-
-    questions.forEach(q => {
-      const name = q.querySelector("input").name;
-      const topic = q.dataset.topic;
-      const selected = [...q.querySelectorAll("input:checked")].map(i => i.value);
-      const correct = correctAnswers[name];
-      let isCorrect = false;
-
-      if (Array.isArray(correct)) {
-        isCorrect = selected.sort().toString() === correct.sort().toString();
-      } else {
-        isCorrect = selected[0] === correct;
+  <script>
+    const questions = [
+      {
+        question: "Which of the following are principles of data protection?",
+        options: ["Confidentiality", "Integrity", "Profitability", "Availability"],
+        correct: ["Confidentiality", "Integrity", "Availability"],
+        topicId: "DataProtection"
+      },
+      {
+        question: "What is the purpose of data governance?",
+        options: ["To improve marketing", "To ensure data accuracy and accountability", "To manage business licenses", "To prevent data entry"],
+        correct: ["To ensure data accuracy and accountability"],
+        topicId: "DataGovernance"
+      },
+      {
+        question: "Which are dimensions of data quality?",
+        options: ["Completeness", "Timeliness", "Brightness", "Consistency"],
+        correct: ["Completeness", "Timeliness", "Consistency"],
+        topicId: "DataQuality"
+      },
+      {
+        question: "Role-based access control (RBAC) ensures that:",
+        options: ["Everyone accesses all data", "Access is based on roles", "Data is deleted regularly", "Passwords are public"],
+        correct: ["Access is based on roles"],
+        topicId: "DataAccess"
+      },
+      {
+        question: "What is data fusion?",
+        options: ["Merging unrelated reports", "Deleting duplicates", "Combining datasets for insights", "Protecting private data"],
+        correct: ["Combining datasets for insights"],
+        topicId: "DataFusion"
+      },
+      {
+        question: "Data must comply with formats and business rules. This is known as:",
+        options: ["Timeliness", "Accuracy", "Validity", "Obscurity"],
+        correct: ["Validity"],
+        topicId: "DataQuality"
+      },
+      {
+        question: "Which act governs personal data in Singapore?",
+        options: ["PDPA", "GDPR", "HIPAA", "FOIA"],
+        correct: ["PDPA"],
+        topicId: "DataProtection"
+      },
+      {
+        question: "Who manages data quality daily?",
+        options: ["Data Stewards", "System Hackers", "CFOs", "Auditors"],
+        correct: ["Data Stewards"],
+        topicId: "DataGovernance"
+      },
+      {
+        question: "What is a risk of poor data quality?",
+        options: ["Faster service", "Better analytics", "Misinformation", "Improved branding"],
+        correct: ["Misinformation"],
+        topicId: "DataQuality"
+      },
+      {
+        question: "Data exploitation in the public sector involves:",
+        options: ["Breaking encryption", "Selling data", "Deriving insights for service improvement", "Ignoring data laws"],
+        correct: ["Deriving insights for service improvement"],
+        topicId: "DataExploitation"
       }
+    ];
 
-      let result = q.querySelector(".result");
-      if (!result) {
-        result = document.createElement("div");
-        result.className = "result";
-        q.appendChild(result);
-      }
+    const quizForm = document.getElementById("quizForm");
+    const resultDiv = document.getElementById("result");
+    const certificateDiv = document.getElementById("certificate");
+    const reviewPrompt = document.getElementById("reviewPrompt");
 
-      if (isCorrect) {
-        result.textContent = "Correct";
-        result.classList.remove("incorrect");
-      } else {
-        result.textContent = "Incorrect";
-        result.classList.add("incorrect");
-        allCorrect = false;
+    const username = localStorage.getItem('username') || "User";
+    document.getElementById('usernameDisplay').innerHTML = `<strong>User:</strong> ${username}`;
 
-        requiredTopics.add(topic);
+    // Randomize 10 questions
+    const selectedQuestions = [...questions].sort(() => 0.5 - Math.random()).slice(0, 10);
 
-        if (followUpQuestions[topic] && !addedFollowUps.has(topic)) {
-          const temp = document.createElement("div");
-          temp.innerHTML = followUpQuestions[topic].html;
-          q.insertAdjacentElement("afterend", temp.firstElementChild);
-          addedFollowUps.add(topic);
+    selectedQuestions.forEach((q, i) => {
+      const qDiv = document.createElement("div");
+      qDiv.className = "question";
+      qDiv.id = "q" + i;
+
+      const questionHTML = `<p><strong>Q${i + 1}:</strong> ${q.question}</p>` +
+        q.options.map((opt, idx) => {
+          return `<label>
+            <input type="checkbox" name="q${i}" value="${opt}"> ${opt}
+          </label>`;
+        }).join("");
+      qDiv.innerHTML = questionHTML;
+      quizForm.appendChild(qDiv);
+    });
+
+    const submitBtn = document.createElement("button");
+    submitBtn.textContent = "Submit Quiz";
+    submitBtn.type = "submit";
+    quizForm.appendChild(submitBtn);
+
+    quizForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      let score = 0;
+      const incorrectTopics = new Set();
+
+      selectedQuestions.forEach((q, i) => {
+        const selected = Array.from(document.querySelectorAll(`input[name="q${i}"]:checked`)).map(el => el.value);
+        const correctSet = new Set(q.correct);
+        const selectedSet = new Set(selected);
+
+        const isCorrect = selectedSet.size === correctSet.size &&
+          [...selectedSet].every(ans => correctSet.has(ans));
+
+        const qBlock = document.getElementById("q" + i);
+        qBlock.classList.remove("incorrect");
+
+        if (isCorrect) {
+          score++;
+        } else {
+          qBlock.classList.add("incorrect");
+          incorrectTopics.add(q.topicId);
         }
+      });
+
+      if (score === selectedQuestions.length) {
+        resultDiv.innerHTML = `<h2>🎉 Congratulations! You passed with full marks (${score}/${selectedQuestions.length})!</h2>`;
+        certificateDiv.innerHTML = `
+          <div id="certificate">
+            <h2>Certificate of Completion</h2>
+            <p>This certifies that <strong>${username}</strong> has successfully completed the Annual Data Governance Training for the Business Registration Authority of Singapore.</p>
+          </div>
+        `;
+        reviewPrompt.innerHTML = "";
+      } else {
+        resultDiv.innerHTML = `<h2>❌ You scored ${score}/${selectedQuestions.length}. 100% is required to pass.</h2>`;
+        let reviewHTML = `<h3>Please review the following topics before retaking:</h3><ul>`;
+        incorrectTopics.forEach(topic => {
+          reviewHTML += `<li><a href="governance.html#${topic}" target="_blank">${topic}</a></li>`;
+        });
+        reviewHTML += `</ul><button onclick="location.reload()">Retake Quiz</button>`;
+        reviewPrompt.innerHTML = reviewHTML;
+        certificateDiv.innerHTML = "";
       }
     });
-
-    if (allCorrect) {
-      document.getElementById("certificate").style.display = "block";
-      document.getElementById("certDate").textContent = new Date().toLocaleDateString();
-      document.getElementById("certName").textContent = username || "Staff Member";
-      document.getElementById("retakeBtn").style.display = "none";
-      document.getElementById("reviewLinks").style.display = "none";
-    } else {
-      showReviewTopics([...requiredTopics]);
-    }
-  });
-
-  function showReviewTopics(topics) {
-    const container = document.getElementById("reviewLinks");
-    container.innerHTML = `<h3>Please review the following topics before retaking:</h3>`;
-    topics.forEach(topic => {
-      const link = document.createElement("a");
-      link.href = `governance.html#${topic.replace(/\s/g, '')}`;
-      link.target = "_blank";
-      link.className = "review-topic";
-      link.textContent = topic;
-      link.addEventListener("click", () => {
-        reviewedTopics.add(topic);
-        checkReviewComplete();
-      });
-      container.appendChild(link);
-    });
-    container.style.display = "block";
-  }
-
-  function checkReviewComplete() {
-    const btn = document.getElementById("retakeBtn");
-    if ([...requiredTopics].every(t => reviewedTopics.has(t))) {
-      btn.disabled = false;
-    }
-  }
-</script>
+  </script>
 
 </body>
 </html>
