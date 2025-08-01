@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head><title>Data Governance Info</title></head>
+<body>
+  <h2>Hi, <span id="name"></span></h2>
+  <p>
+    Here's our annual data governance training content. Please read carefully before taking the quiz.
+  </p>
+
+  <button onclick="goToQuiz()">Continue to Quiz</button>
+
+  <script>
+    document.getElementById('name').textContent = localStorage.getItem('username');
+    function goToQuiz() {
+      window.location.href = "quiz.html";
+    }
+  </script>
+</body>
+</html>
