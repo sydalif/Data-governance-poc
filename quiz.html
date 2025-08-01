@@ -68,7 +68,7 @@
       background: #e9f0f7;
       border-left: 5px solid #003366;
       padding: 15px 20px;
-      margin-top: 20px;
+      margin-top: 15px;
       border-radius: 4px;
     }
 
@@ -91,7 +91,6 @@
     .review-link a {
       color: #003366;
       text-decoration: underline;
-      cursor: pointer;
     }
 
     #certificate {
@@ -114,6 +113,15 @@
       font-size: 1.1rem;
       margin: 10px 0;
     }
+
+    #retakeBtn {
+      display: none;
+      background-color: #990000;
+    }
+
+    #retakeBtn:hover {
+      background-color: #770000;
+    }
   </style>
 </head>
 <body>
@@ -122,82 +130,87 @@
 
 <form id="quizForm">
 
-  <!-- Questions (Add more if needed) -->
-  <div class="question" data-topic="Data Governance">
-    <h3>1. What is the purpose of data governance?</h3>
-    <label><input type="radio" name="q1" value="a" /> To manage data via policies and responsibilities</label>
-    <label><input type="radio" name="q1" value="b" /> To store as much data as possible</label>
-    <label><input type="radio" name="q1" value="c" /> To allow unrestricted access</label>
-  </div>
+  <div id="questionsContainer">
 
-  <div class="question" data-topic="Data Quality">
-    <h3>2. Which of these are data quality dimensions? (Select all that apply)</h3>
-    <label><input type="checkbox" name="q2" value="accuracy" /> Accuracy</label>
-    <label><input type="checkbox" name="q2" value="completeness" /> Completeness</label>
-    <label><input type="checkbox" name="q2" value="popularity" /> Popularity</label>
-    <label><input type="checkbox" name="q2" value="timeliness" /> Timeliness</label>
-  </div>
+    <div class="question" data-topic="Data Governance">
+      <h3>1. What is the purpose of data governance?</h3>
+      <label><input type="radio" name="q1" value="a" /> To manage data via policies and responsibilities</label>
+      <label><input type="radio" name="q1" value="b" /> To store as much data as possible</label>
+      <label><input type="radio" name="q1" value="c" /> To allow unrestricted access</label>
+    </div>
 
-  <div class="question" data-topic="Data Protection">
-    <h3>3. Under PDPA, what should staff do if they suspect a data breach?</h3>
-    <label><input type="radio" name="q3" value="a" /> Ignore it</label>
-    <label><input type="radio" name="q3" value="b" /> Report it to the Data Protection Officer</label>
-    <label><input type="radio" name="q3" value="c" /> Delete the data silently</label>
-  </div>
+    <div class="question" data-topic="Data Quality">
+      <h3>2. Which of these are key data quality dimensions? (Select all that apply)</h3>
+      <label><input type="checkbox" name="q2" value="accuracy" /> Accuracy</label>
+      <label><input type="checkbox" name="q2" value="completeness" /> Completeness</label>
+      <label><input type="checkbox" name="q2" value="timeliness" /> Timeliness</label>
+      <label><input type="checkbox" name="q2" value="irrelevance" /> Irrelevance</label>
+    </div>
 
-  <div class="question" data-topic="Data Access and Exploitation">
-    <h3>4. What is responsible data fusion?</h3>
-    <label><input type="radio" name="q4" value="a" /> Deleting redundant data</label>
-    <label><input type="radio" name="q4" value="b" /> Combining multiple data sources ethically for insights</label>
-    <label><input type="radio" name="q4" value="c" /> Sharing all data openly</label>
-  </div>
+    <div class="question" data-topic="Data Protection">
+      <h3>3. What does data protection primarily focus on?</h3>
+      <label><input type="radio" name="q3" value="a" /> Data analysis</label>
+      <label><input type="radio" name="q3" value="b" /> Privacy and security</label>
+      <label><input type="radio" name="q3" value="c" /> Data storage capacity</label>
+    </div>
 
-  <div class="question" data-topic="Key Staff Responsibilities">
-    <h3>5. Which are staff responsibilities? (Select all that apply)</h3>
-    <label><input type="checkbox" name="q5" value="follow_procedures" /> Follow procedures</label>
-    <label><input type="checkbox" name="q5" value="ignore_issues" /> Ignore anomalies</label>
-    <label><input type="checkbox" name="q5" value="report_issues" /> Report data issues</label>
-    <label><input type="checkbox" name="q5" value="training" /> Participate in training</label>
-  </div>
+    <div class="question" data-topic="Data Access">
+      <h3>4. Who should have access to sensitive data?</h3>
+      <label><input type="radio" name="q4" value="a" /> Everyone in the agency</label>
+      <label><input type="radio" name="q4" value="b" /> Only authorized personnel</label>
+      <label><input type="radio" name="q4" value="c" /> External partners</label>
+    </div>
 
-  <div class="question" data-topic="Data Quality">
-    <h3>6. Why is completeness important in data?</h3>
-    <label><input type="radio" name="q6" value="a" /> It saves space</label>
-    <label><input type="radio" name="q6" value="b" /> It ensures all necessary fields are filled</label>
-    <label><input type="radio" name="q6" value="c" /> It helps guess missing info</label>
-  </div>
+    <div class="question" data-topic="Data Governance">
+      <h3>5. Which of the following are responsibilities of staff for data governance? (Select all that apply)</h3>
+      <label><input type="checkbox" name="q5" value="follow_procedures" /> Follow procedures</label>
+      <label><input type="checkbox" name="q5" value="report_issues" /> Report data issues</label>
+      <label><input type="checkbox" name="q5" value="training" /> Attend data governance training</label>
+      <label><input type="checkbox" name="q5" value="ignore_policies" /> Ignore policies</label>
+    </div>
 
-  <div class="question" data-topic="Data Protection">
-    <h3>7. How should data no longer needed be handled?</h3>
-    <label><input type="radio" name="q7" value="a" /> Backed up forever</label>
-    <label><input type="radio" name="q7" value="b" /> Securely disposed of</label>
-    <label><input type="radio" name="q7" value="c" /> Shared with third parties</label>
-  </div>
+    <div class="question" data-topic="Data Exploitation">
+      <h3>6. What is data exploitation?</h3>
+      <label><input type="radio" name="q6" value="a" /> Deleting old data</label>
+      <label><input type="radio" name="q6" value="b" /> Using data to derive insights and value</label>
+      <label><input type="radio" name="q6" value="c" /> Storing data securely</label>
+    </div>
 
-  <div class="question" data-topic="Data Access and Exploitation">
-    <h3>8. What ensures ethical data exploitation?</h3>
-    <label><input type="radio" name="q8" value="a" /> No rules at all</label>
-    <label><input type="radio" name="q8" value="b" /> Clear policies, controls and audit logs</label>
-    <label><input type="radio" name="q8" value="c" /> Full open access</label>
-  </div>
+    <div class="question" data-topic="Data Fusion">
+      <h3>7. What is data fusion?</h3>
+      <label><input type="radio" name="q7" value="a" /> Separating datasets</label>
+      <label><input type="radio" name="q7" value="b" /> Combining data from multiple sources</label>
+      <label><input type="radio" name="q7" value="c" /> Deleting duplicate data</label>
+    </div>
 
-  <div class="question" data-topic="Data Governance">
-    <h3>9. Who is accountable for data protection and quality?</h3>
-    <label><input type="radio" name="q9" value="a" /> Everyone in the agency</label>
-    <label><input type="radio" name="q9" value="b" /> Only the IT team</label>
-    <label><input type="radio" name="q9" value="c" /> External vendors</label>
-  </div>
+    <div class="question" data-topic="Data Access">
+      <h3>8. What is a key principle for data access?</h3>
+      <label><input type="radio" name="q8" value="a" /> Unlimited access</label>
+      <label><input type="radio" name="q8" value="b" /> Role-based access control</label>
+      <label><input type="radio" name="q8" value="c" /> Public availability</label>
+    </div>
 
-  <div class="question" data-topic="Key Staff Responsibilities">
-    <h3>10. What are examples of poor data governance? (Select all that apply)</h3>
-    <label><input type="checkbox" name="q10" value="weak_controls" /> Weak access controls</label>
-    <label><input type="checkbox" name="q10" value="ignored_training" /> Skipping required training</label>
-    <label><input type="checkbox" name="q10" value="secure_systems" /> Using approved systems</label>
-    <label><input type="checkbox" name="q10" value="unreported_issues" /> Not reporting data issues</label>
+    <div class="question" data-topic="Data Quality">
+      <h3>9. Which data quality issue can affect decision making?</h3>
+      <label><input type="radio" name="q9" value="a" /> Inaccurate data</label>
+      <label><input type="radio" name="q9" value="b" /> Extra storage</label>
+      <label><input type="radio" name="q9" value="c" /> Too much data</label>
+    </div>
+
+    <div class="question" data-topic="Data Governance">
+      <h3>10. What could be a cause of poor data governance? (Select all that apply)</h3>
+      <label><input type="checkbox" name="q10" value="weak_controls" /> Weak controls</label>
+      <label><input type="checkbox" name="q10" value="ignored_training" /> Ignored training</label>
+      <label><input type="checkbox" name="q10" value="unreported_issues" /> Unreported issues</label>
+      <label><input type="checkbox" name="q10" value="strong_leadership" /> Strong leadership</label>
+    </div>
+
   </div>
 
   <button type="submit">Submit</button>
 </form>
+
+<button id="retakeBtn" onclick="resetQuiz()">Retake Quiz</button>
 
 <div id="certificate">
   <h2>Annual Data Governance Training Acknowledgement</h2>
@@ -220,6 +233,24 @@
     q10: ["weak_controls", "ignored_training", "unreported_issues"]
   };
 
+  // Shuffle helper function
+  function shuffleArray(array) {
+    for(let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  // Randomize questions order inside #questionsContainer
+  function shuffleQuestions() {
+    const container = document.getElementById('questionsContainer');
+    const questions = Array.from(container.children);
+    shuffleArray(questions);
+    // Remove all questions and re-append in shuffled order
+    container.innerHTML = '';
+    questions.forEach(q => container.appendChild(q));
+  }
+
   function arraysEqual(a, b) {
     return a.length === b.length && a.every(val => b.includes(val));
   }
@@ -230,9 +261,10 @@
     const form = e.target;
     const questions = form.querySelectorAll(".question");
     let allCorrect = true;
+
     questions.forEach((q, idx) => {
       const qid = "q" + (idx + 1);
-      const selected = [...q.querySelectorAll("input:checked")].map(input => input.value);
+      const selected = [...q.querySelectorAll("input:checked")].map(i => i.value);
       const answer = correctAnswers[qid];
 
       let correct = false;
@@ -260,14 +292,35 @@
     });
 
     if (allCorrect) {
-      const certBox = document.getElementById("certificate");
+      document.getElementById("certificate").style.display = "block";
       document.getElementById("certName").textContent = localStorage.getItem("username") || "Staff Member";
       document.getElementById("certDate").textContent = new Date().toLocaleDateString();
-      certBox.style.display = "block";
+      document.getElementById("retakeBtn").style.display = "none";
     } else {
-      alert("You must answer all questions correctly to pass. Please review the topics and retake.");
+      alert("You must answer all questions correctly to pass. Review the highlighted topics and try again.");
+      document.getElementById("retakeBtn").style.display = "block";
     }
   });
+
+  function resetQuiz() {
+    const form = document.getElementById("quizForm");
+    form.reset();
+
+    form.querySelectorAll(".result").forEach(r => r.remove());
+
+    document.getElementById("certificate").style.display = "none";
+    document.getElementById("retakeBtn").style.display = "none";
+
+    shuffleQuestions();
+
+    window.scrollTo(0, 0);
+  }
+
+  // Shuffle questions on initial page load
+  window.onload = () => {
+    shuffleQuestions();
+  };
 </script>
+
 </body>
 </html>
