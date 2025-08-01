@@ -5,11 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Welcome</title>
   <style>
-    /* Same CSS as before */
     body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
+      margin: 0; padding: 0; height: 100%;
       font-family: Arial, sans-serif;
       background-color: #f9f9f9;
     }
@@ -17,8 +14,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      text-align: center;
       height: 100vh;
+      text-align: center;
     }
     .container {
       background-color: #fff;
@@ -46,6 +43,9 @@
       margin-bottom: 20px;
       border-radius: 5px;
       border: 1px solid #ccc;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
     button {
       background-color: #003366;
@@ -56,6 +56,9 @@
       border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
     button:hover {
       background-color: #00509e;
@@ -68,7 +71,6 @@
     <h1>Welcome to the Annual Data Governance Training</h1>
     <p>Please enter your name to begin:</p>
     <input type="text" id="username" placeholder="Your name" />
-    <br />
     <button onclick="login()">Start Training</button>
   </div>
 
