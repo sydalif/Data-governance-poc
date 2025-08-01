@@ -5,7 +5,18 @@
   <style>
     body { font-family: sans-serif; padding: 20px; }
     .question { margin-bottom: 20px; }
+    #certificate {
+      display:none; 
+      margin-top: 30px; 
+      padding: 20px; 
+      border: 2px solid #000; 
+      width: 80%; 
+      max-width: 600px; 
+      background: #f9f9f9;
+    }
   </style>
+  <!-- Add html2pdf library -->
+  <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.min.js"></script>
 </head>
 <body>
   <h2>Data Governance Quiz</h2>
@@ -14,6 +25,17 @@
 
   <div id="result"></div>
   <button id="retryBtn" onclick="loadQuiz()" style="display:none;">Retake Quiz</button>
+
+  <!-- Certificate HTML -->
+  <div id="certificate">
+    <h2 style="text-align: center;">Certificate of Completion</h2>
+    <p>This certifies that</p>
+    <h3 id="certName" style="text-align: center;"></h3>
+    <p>has successfully completed the Data Governance Annual Training</p>
+    <p>Date: <span id="certDate"></span></p>
+    <p style="text-align: center; margin-top: 20px;">Public Sector Agency, Singapore</p>
+    <button onclick="downloadCertificate()">Download Certificate</button>
+  </div>
 
   <script>
     const questions = [
@@ -39,6 +61,7 @@
     function loadQuiz() {
       document.getElementById('result').innerText = '';
       document.getElementById('retryBtn').style.display = 'none';
+      document.getElementById('certificate').style.display = 'none';
 
       // Randomly pick 15 questions
       currentQuiz = [...questions]
@@ -72,15 +95,32 @@
       });
 
       const result = document.getElementById('result');
+      const certDiv = document.getElementById('certificate');
+      const retryBtn = document.getElementById('retryBtn');
+
       if (score === 15) {
         result.innerHTML = `✅ Congratulations! You scored 15/15 and passed the quiz.`;
+
+        // Show certificate
+        const name = localStorage.getItem('username') || "Staff Member";
+        const today = new Date().toLocaleDateString();
+        document.getElementById('certName').textContent = name;
+        document.getElementById('certDate').textContent = today;
+        certDiv.style.display = 'block';
+
       } else {
         result.innerHTML = `❌ You scored ${score}/15. You must retake the quiz to pass.`;
-        document.getElementById('retryBtn').style.display = 'inline';
+        retryBtn.style.display = 'inline';
+        certDiv.style.display = 'none';
       }
     }
 
-    // Load the quiz initially
+    function downloadCertificate() {
+      const cert = document.getElementById('certificate');
+      html2pdf().from(cert).save('Data-Governance-Certificate.pdf');
+    }
+
+    // Load quiz on page load
     loadQuiz();
   </script>
 </body>
