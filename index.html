@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login - Data Governance</title>
+</head>
+<body>
+  <h2>Welcome to the Data Governance App</h2>
+  <input type="text" id="username" placeholder="Enter your name">
+  <button onclick="login()">Start</button>
+
+  <script>
+    function login() {
+      const username = document.getElementById('username').value;
+      if (username) {
+        localStorage.setItem('username', username);
+        window.location.href = "governance.html";
+      } else {
+        alert("Enter your name");
+      }
+    }
+  </script>
+</body>
+</html>
