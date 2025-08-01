@@ -9,7 +9,7 @@
       font-family: Arial, sans-serif;
       max-width: 900px;
       margin: 20px auto;
-      background: #f8f9fa;
+      background: #f4f7fa;
       padding: 20px;
     }
 
@@ -75,13 +75,24 @@
       text-align: center;
     }
 
-    #retakeBtn {
-      display: none;
-      background-color: #990000;
+    #retakeBtn:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
     }
 
-    #retakeBtn:hover {
-      background-color: #770000;
+    #reviewLinks {
+      display: none;
+      background: #fff5e6;
+      border-left: 4px solid #ff9900;
+      padding: 15px;
+      margin-top: 20px;
+    }
+
+    a.review-topic {
+      display: block;
+      color: #003366;
+      margin: 6px 0;
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -91,8 +102,7 @@
 
 <form id="quizForm">
   <div id="questionsContainer">
-    <!-- Base 10 questions (each has unique ID) -->
-
+    <!-- Example question -->
     <div class="question" data-topic="Data Governance" id="q1">
       <h3>1. What is the purpose of data governance?</h3>
       <label><input type="radio" name="q1" value="a"> To manage data via policies and responsibilities</label>
@@ -115,61 +125,15 @@
       <label><input type="radio" name="q3" value="c"> Hardware maintenance</label>
     </div>
 
-    <div class="question" data-topic="Data Access" id="q4">
-      <h3>4. Who should have access to confidential data?</h3>
-      <label><input type="radio" name="q4" value="a"> All staff</label>
-      <label><input type="radio" name="q4" value="b"> Only authorized personnel</label>
-      <label><input type="radio" name="q4" value="c"> Public users</label>
-    </div>
-
-    <div class="question" data-topic="Data Governance" id="q5">
-      <h3>5. What are responsibilities of data stewards? (Select all that apply)</h3>
-      <label><input type="checkbox" name="q5" value="policies"> Enforcing data policies</label>
-      <label><input type="checkbox" name="q5" value="ignore"> Ignoring outdated data</label>
-      <label><input type="checkbox" name="q5" value="training"> Supporting training</label>
-      <label><input type="checkbox" name="q5" value="monitoring"> Monitoring compliance</label>
-    </div>
-
-    <div class="question" data-topic="Data Exploitation" id="q6">
-      <h3>6. What is data exploitation?</h3>
-      <label><input type="radio" name="q6" value="a"> Destroying data</label>
-      <label><input type="radio" name="q6" value="b"> Using data for insight</label>
-      <label><input type="radio" name="q6" value="c"> Ignoring raw data</label>
-    </div>
-
-    <div class="question" data-topic="Data Fusion" id="q7">
-      <h3>7. What is the goal of data fusion?</h3>
-      <label><input type="radio" name="q7" value="a"> Separate data sources</label>
-      <label><input type="radio" name="q7" value="b"> Combine multiple data sources for better insight</label>
-      <label><input type="radio" name="q7" value="c"> Limit integration</label>
-    </div>
-
-    <div class="question" data-topic="Data Quality" id="q8">
-      <h3>8. Which issue affects data-driven decision making?</h3>
-      <label><input type="radio" name="q8" value="a"> Inaccurate data</label>
-      <label><input type="radio" name="q8" value="b"> Bold font</label>
-      <label><input type="radio" name="q8" value="c"> Short names</label>
-    </div>
-
-    <div class="question" data-topic="Data Protection" id="q9">
-      <h3>9. How should data breaches be handled?</h3>
-      <label><input type="radio" name="q9" value="a"> Ignored</label>
-      <label><input type="radio" name="q9" value="b"> Reported and mitigated</label>
-      <label><input type="radio" name="q9" value="c"> Hidden from users</label>
-    </div>
-
-    <div class="question" data-topic="Data Access" id="q10">
-      <h3>10. What is a secure access method?</h3>
-      <label><input type="radio" name="q10" value="a"> Shared accounts</label>
-      <label><input type="radio" name="q10" value="b"> Role-based access control</label>
-      <label><input type="radio" name="q10" value="c"> Email links</label>
-    </div>
+    <!-- Add more base questions as needed -->
   </div>
 
   <button type="submit">Submit</button>
 </form>
 
-<button id="retakeBtn" onclick="location.reload()">Retake Quiz</button>
+<div id="reviewLinks"></div>
+
+<button id="retakeBtn" onclick="location.reload()" disabled>Retake Quiz</button>
 
 <div id="certificate">
   <h2>Annual Data Governance Training Acknowledgement</h2>
@@ -182,14 +146,7 @@
   const correctAnswers = {
     q1: "a",
     q2: ["accuracy", "timeliness", "reliability"],
-    q3: "b",
-    q4: "b",
-    q5: ["policies", "training", "monitoring"],
-    q6: "b",
-    q7: "b",
-    q8: "a",
-    q9: "b",
-    q10: "b"
+    q3: "b"
   };
 
   const followUpQuestions = {
@@ -202,26 +159,28 @@
           <label><input type="radio" name="dg_followup" value="b"> ISO 9001</label>
           <label><input type="radio" name="dg_followup" value="c"> Agile</label>
         </div>`
-    },
-    "Data Quality": {
-      id: "dq_followup",
-      html: `
-        <div class="question" data-topic="Data Quality" id="dq_followup">
-          <h3>Follow-up: Why is timeliness important in data quality?</h3>
-          <label><input type="radio" name="dq_followup" value="a"> It makes data trendy</label>
-          <label><input type="radio" name="dq_followup" value="b"> It ensures decisions use the most recent data</label>
-          <label><input type="radio" name="dq_followup" value="c"> It reduces internet speed</label>
-        </div>`
     }
-    // Add more topics if needed
   };
+
+  let reviewedTopics = new Set();
+  let requiredTopics = new Set();
+
+  // Prompt login name once
+  let username = localStorage.getItem("username");
+  if (!username) {
+    username = prompt("Enter your name for certificate:");
+    if (username) localStorage.setItem("username", username);
+  }
 
   document.getElementById("quizForm").addEventListener("submit", function(e) {
     e.preventDefault();
+
     const form = e.target;
     const questions = form.querySelectorAll(".question");
     let allCorrect = true;
     const addedFollowUps = new Set();
+    requiredTopics.clear();
+    reviewedTopics.clear();
 
     questions.forEach(q => {
       const name = q.querySelector("input").name;
@@ -251,6 +210,8 @@
         result.classList.add("incorrect");
         allCorrect = false;
 
+        requiredTopics.add(topic);
+
         if (followUpQuestions[topic] && !addedFollowUps.has(topic)) {
           const temp = document.createElement("div");
           temp.innerHTML = followUpQuestions[topic].html;
@@ -263,12 +224,38 @@
     if (allCorrect) {
       document.getElementById("certificate").style.display = "block";
       document.getElementById("certDate").textContent = new Date().toLocaleDateString();
+      document.getElementById("certName").textContent = username || "Staff Member";
       document.getElementById("retakeBtn").style.display = "none";
+      document.getElementById("reviewLinks").style.display = "none";
     } else {
-      document.getElementById("retakeBtn").style.display = "block";
-      alert("You must answer all questions correctly to receive the certificate. Review and retake.");
+      showReviewTopics([...requiredTopics]);
     }
   });
+
+  function showReviewTopics(topics) {
+    const container = document.getElementById("reviewLinks");
+    container.innerHTML = `<h3>Please review the following topics before retaking:</h3>`;
+    topics.forEach(topic => {
+      const link = document.createElement("a");
+      link.href = `governance.html#${topic.replace(/\s/g, '')}`;
+      link.target = "_blank";
+      link.className = "review-topic";
+      link.textContent = topic;
+      link.addEventListener("click", () => {
+        reviewedTopics.add(topic);
+        checkReviewComplete();
+      });
+      container.appendChild(link);
+    });
+    container.style.display = "block";
+  }
+
+  function checkReviewComplete() {
+    const btn = document.getElementById("retakeBtn");
+    if ([...requiredTopics].every(t => reviewedTopics.has(t))) {
+      btn.disabled = false;
+    }
+  }
 </script>
 
 </body>
