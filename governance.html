@@ -2,162 +2,127 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Data Governance Briefing - DAMA-DMBOK Overview</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data Governance Training</title>
   <style>
     body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0 auto;
-      padding: 0 20px 40px;
+      font-family: Arial, sans-serif;
       max-width: 900px;
-      background: #f8f9fa;
-      color: #1a1a1a;
+      margin: auto;
+      padding: 30px;
       line-height: 1.6;
+      background-color: #f9f9f9;
     }
 
-    h1, h2, h3 {
+    h1, h2 {
       color: #003366;
-    }
-
-    h1 {
-      font-size: 2.2rem;
-      text-align: center;
-      margin: 40px 0 20px;
     }
 
     section {
       background: #fff;
-      padding: 25px 30px;
+      padding: 25px;
+      margin: 20px 0;
+      border-left: 5px solid #003366;
       border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      margin-bottom: 30px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
     ul {
-      margin-left: 1.5em;
+      margin-left: 20px;
     }
 
-    blockquote {
-      font-style: italic;
-      color: #444;
-      border-left: 5px solid #003366;
-      padding-left: 15px;
-      background-color: #e9f0f7;
-      margin: 1em 0;
-    }
-
-    button {
-      display: block;
-      background-color: #003366;
-      color: white;
-      border: none;
-      padding: 14px 30px;
-      font-size: 1.1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      margin: 40px auto 0;
-      transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #002244;
-    }
-
-    #name {
-      color: #0055a5;
-    }
-
-    @media (max-width: 600px) {
-      body {
-        padding: 15px;
-      }
-
-      button {
-        width: 100%;
-      }
+    a {
+      color: #003366;
     }
   </style>
 </head>
 <body>
 
-  <h1>Welcome, <span id="name"></span></h1>
+  <h1>Annual Data Governance Training</h1>
 
-  <section>
-    <h2>Annual Data Governance Briefing</h2>
-    <p>This briefing provides an overview of key concepts from the <strong>DAMA-DMBOK (Data Management Body of Knowledge)</strong>, tailored to our agency's role in administering business registration in Singapore. Understanding and applying these principles ensures our data is accurate, secure, and responsibly used to support government operations and public trust.</p>
-  </section>
+  <p>This training is designed for all staff of the Business Registration Authority of Singapore, covering key concepts from the DAMA-DMBOK framework and tailored for public sector needs. Responsible data management ensures compliance with laws such as PDPA, supports informed decision-making, and builds public trust.</p>
 
   <section id="DataGovernance">
-    <h2>Data Governance (General Knowledge)</h2>
-    <p>Data governance is the foundation for managing data assets responsibly. It defines policies, roles, and responsibilities to ensure data is properly handled throughout its lifecycle.</p>
+    <h2>Data Governance</h2>
+    <p>Data Governance is the overall management of the availability, usability, integrity, and security of data used in an organization. In the public sector, this means ensuring that data about businesses, registrations, and transactions is accurate, accessible, and protected.</p>
+    <p>The DAMA-DMBOK framework defines critical components such as:</p>
     <ul>
-      <li>Assigns accountability for data quality and protection</li>
-      <li>Sets clear standards and procedures for managing data</li>
-      <li>Ensures compliance with Singapore laws such as PDPA</li>
-      <li>Supports transparency, oversight, and auditability</li>
+      <li><strong>Data Policies and Standards:</strong> Rules that ensure data is handled consistently and meets quality requirements.</li>
+      <li><strong>Roles and Responsibilities:</strong> Including Data Owners who set policies, Data Stewards who manage data quality, and Data Custodians who maintain systems.</li>
+      <li><strong>Accountability and Compliance:</strong> Processes to audit data usage and ensure legal and ethical standards are upheld.</li>
     </ul>
-    <blockquote>"Effective data governance enables confident, timely decisions while safeguarding sensitive information."</blockquote>
+    <p>For example, in business registration, governance ensures that only authorized staff can update company information, and that all changes are logged and auditable.</p>
   </section>
 
   <section id="DataQuality">
     <h2>Data Quality</h2>
-    <p>Reliable business registration depends on data that is accurate, complete, and timely. The four key dimensions of data quality are:</p>
+    <p>Data quality is essential to maintain trust in business registration data. Poor quality can cause incorrect business status, delayed services, or even legal penalties.</p>
+    <p>The key dimensions include:</p>
     <ul>
-      <li><strong>Accuracy:</strong> Reflects true values (e.g., business names, dates)</li>
-      <li><strong>Completeness:</strong> No missing fields in required data</li>
-      <li><strong>Consistency:</strong> Data is uniform across systems</li>
-      <li><strong>Timeliness:</strong> Information is updated promptly</li>
+      <li><strong>Accuracy:</strong> Data must correctly represent real-world entities. For example, a company’s registered address must be current and verified.</li>
+      <li><strong>Completeness:</strong> All required fields must be filled. Missing company directors or missing license numbers can affect processing.</li>
+      <li><strong>Timeliness:</strong> Data should be up-to-date. Changes in business status must be reflected promptly to avoid misinformation.</li>
+      <li><strong>Consistency:</strong> Data should not contradict itself across systems, such as matching registration dates in different databases.</li>
+      <li><strong>Validity:</strong> Data must comply with business rules and formats, e.g., correct business registration number formats.</li>
     </ul>
-    <p>All staff are expected to follow validation and correction processes, and report any discrepancies to ensure high data quality is maintained.</p>
+    <p>Quality checks include automated validation during entry, periodic data profiling, and remediation workflows for errors found.</p>
   </section>
 
   <section id="DataProtection">
     <h2>Data Protection</h2>
-    <p>As public officers, we have a duty under the <strong>Personal Data Protection Act (PDPA)</strong> to protect sensitive information collected from businesses and individuals.</p>
+    <p>In the public sector, data protection is crucial to safeguard sensitive business information and personal data of business owners and employees.</p>
+    <p>Key principles include:</p>
     <ul>
-      <li>Access to data is limited to authorised personnel only</li>
-      <li>Use secure, government-approved platforms for handling data</li>
-      <li>Report suspected data breaches immediately to the Data Protection Officer</li>
-      <li>Use data only for its stated and legal purpose</li>
-      <li>Dispose of data securely when no longer needed</li>
+      <li><strong>Confidentiality:</strong> Ensuring only authorized personnel access sensitive data.</li>
+      <li><strong>Integrity:</strong> Preventing unauthorized alteration of data.</li>
+      <li><strong>Availability:</strong> Data should be available when needed, without disruption.</li>
     </ul>
-    <blockquote>"Data protection safeguards not just information, but also public confidence in government institutions."</blockquote>
+    <p>The Personal Data Protection Act (PDPA) of Singapore provides the legal framework. Compliance involves:</p>
+    <ul>
+      <li>Data encryption both at rest and in transit.</li>
+      <li>Role-based access controls limiting data access.</li>
+      <li>Regular staff training on data handling and breach response.</li>
+      <li>Incident monitoring and reporting procedures.</li>
+    </ul>
+    <p>For example, staff handling new business registrations should only access data needed for their role, with system logs maintained for audits.</p>
   </section>
 
-  <section id="DataAccessAndExploitation">
-    <h2>Data Access and Exploitation (Fusion)</h2>
-    <p>We grant access to data based on the principle of least privilege — access only to the data you need to do your job.</p>
-    <p>Data exploitation and fusion refer to responsible use and combining of data from different sources for insight and efficiency.</p>
+  <section id="DataAccess">
+    <h2>Data Access</h2>
+    <p>Data access controls regulate who can view or modify data. The principle of least privilege is vital: users get only the access necessary to perform their jobs.</p>
+    <p>Best practices include:</p>
     <ul>
-      <li>Access control is reviewed and logged regularly</li>
-      <li>Fusion of datasets (e.g., registration + tax info) must be justified and secure</li>
-      <li>Use analytics to improve policies and identify fraud</li>
-      <li>Ensure ethical and legal use of combined data</li>
+      <li><strong>Role-Based Access Control (RBAC):</strong> Defining roles such as clerk, supervisor, and auditor, each with specific data permissions.</li>
+      <li><strong>Authentication and Authorization:</strong> Strong password policies, multi-factor authentication, and regular access reviews.</li>
+      <li><strong>Audit Trails:</strong> Tracking access and changes to data for accountability.</li>
     </ul>
-    <p>Example: Analyzing business trends by combining registration data with economic indicators to inform policy decisions.</p>
+    <p>For example, a clerk processing business filings cannot approve license issuance without supervisor approval.</p>
   </section>
 
-  <section id="KeyStaffResponsibilities">
-    <h2>Key Staff Responsibilities</h2>
+  <section id="DataExploitation">
+    <h2>Data Exploitation</h2>
+    <p>Data exploitation means leveraging data to generate insights that improve services and support policy decisions.</p>
+    <p>In a public agency, this could involve:</p>
     <ul>
-      <li>Follow documented procedures to maintain data integrity</li>
-      <li>Adhere strictly to data protection policies</li>
-      <li>Report any suspicious or incorrect data handling</li>
-      <li>Participate in annual data governance training and testing</li>
-      <li>Use only government-issued systems for work-related data</li>
+      <li>Analyzing registration trends to identify emerging business sectors.</li>
+      <li>Detecting suspicious activities or potential fraud through anomaly detection.</li>
+      <li>Supporting digital services by personalizing user experiences.</li>
     </ul>
-    <p>Each staff member is a data steward — responsible for ensuring trust and accuracy in the agency’s data management practices.</p>
+    <p>However, exploitation must respect privacy and comply with laws. Data scientists and analysts need clear guidelines on permissible uses.</p>
   </section>
 
-  <button onclick="goToQuiz()">Start Quiz</button>
+  <section id="DataFusion">
+    <h2>Data Fusion</h2>
+    <p>Data fusion integrates data from multiple sources to create richer datasets for analysis and decision-making.</p>
+    <p>Examples include combining business registration data with tax filings or labor data to provide holistic views of economic activity.</p>
+    <p>Challenges in data fusion include:</p>
+    <ul>
+      <li>Data format and semantic differences requiring standardization.</li>
+      <li>Resolving duplicates and conflicting information.</li>
+      <li>Maintaining privacy and compliance across datasets.</li>
+    </ul>
+    <p>Successful fusion enhances situational awareness and enables cross-agency collaboration, improving service delivery and regulatory oversight.</p>
+  </section>
 
-  <script>
-    // Pull stored name from localStorage
-    document.getElementById('name').textContent = localStorage.getItem('username') || 'Staff Member';
-
-    function goToQuiz() {
-      window.location.href = "quiz.html";
-    }
-  </script>
 </body>
 </html>
