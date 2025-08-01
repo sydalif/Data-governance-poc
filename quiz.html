@@ -194,4 +194,80 @@
     <label><input type="checkbox" name="q10" value="ignored_training" /> Skipping required training</label>
     <label><input type="checkbox" name="q10" value="secure_systems" /> Using approved systems</label>
     <label><input type="checkbox" name="q10" value="unreported_issues" /> Not reporting data issues</label>
- 
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+
+<div id="certificate">
+  <h2>Annual Data Governance Training Acknowledgement</h2>
+  <p>This is to acknowledge that <strong id="certName"></strong> has successfully completed the annual data governance training.</p>
+  <p>Date of completion: <strong id="certDate"></strong></p>
+  <p>Agency: <strong>Business Registration Authority of Singapore</strong></p>
+</div>
+
+<script>
+  const correctAnswers = {
+    q1: "a",
+    q2: ["accuracy", "completeness", "timeliness"],
+    q3: "b",
+    q4: "b",
+    q5: ["follow_procedures", "report_issues", "training"],
+    q6: "b",
+    q7: "b",
+    q8: "b",
+    q9: "a",
+    q10: ["weak_controls", "ignored_training", "unreported_issues"]
+  };
+
+  function arraysEqual(a, b) {
+    return a.length === b.length && a.every(val => b.includes(val));
+  }
+
+  document.getElementById("quizForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const questions = form.querySelectorAll(".question");
+    let allCorrect = true;
+    questions.forEach((q, idx) => {
+      const qid = "q" + (idx + 1);
+      const selected = [...q.querySelectorAll("input:checked")].map(input => input.value);
+      const answer = correctAnswers[qid];
+
+      let correct = false;
+      if (Array.isArray(answer)) {
+        correct = arraysEqual(selected.sort(), answer.sort());
+      } else {
+        correct = selected[0] === answer;
+      }
+
+      let result = q.querySelector(".result");
+      if (!result) {
+        result = document.createElement("div");
+        result.className = "result";
+        q.appendChild(result);
+      }
+
+      if (correct) {
+        result.textContent = "Correct";
+        result.classList.remove("incorrect");
+      } else {
+        allCorrect = false;
+        result.innerHTML = `<strong class="highlight-incorrect">Incorrect</strong><div class="review-link">Review: <a href="governance.html#${q.dataset.topic.replace(/\s/g, '')}">${q.dataset.topic}</a></div>`;
+        result.classList.add("incorrect");
+      }
+    });
+
+    if (allCorrect) {
+      const certBox = document.getElementById("certificate");
+      document.getElementById("certName").textContent = localStorage.getItem("username") || "Staff Member";
+      document.getElementById("certDate").textContent = new Date().toLocaleDateString();
+      certBox.style.display = "block";
+    } else {
+      alert("You must answer all questions correctly to pass. Please review the topics and retake.");
+    }
+  });
+</script>
+</body>
+</html>
