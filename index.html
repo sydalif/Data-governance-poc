@@ -6,15 +6,14 @@
   <title>Welcome</title>
   <style>
     body, html {
-      margin: 0; padding: 0; height: 100%;
+      margin: 0; 
+      padding: 0; 
+      height: 100%;
       font-family: Arial, sans-serif;
       background-color: #f9f9f9;
-    }
-    body {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
       text-align: center;
     }
     .container {
@@ -24,7 +23,15 @@
       max-width: 600px;
       width: 90%;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      animation: fadeInSlide 1s ease-out;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.7s forwards;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     h1 {
       color: #003366;
@@ -36,11 +43,6 @@
       color: #333;
       margin-bottom: 30px;
       line-height: 1.5;
-    }
-    #warning {
-      color: red;
-      margin-bottom: 20px;
-      display: none;
     }
     input[type="text"] {
       padding: 10px;
@@ -69,27 +71,6 @@
     button:hover {
       background-color: #00509e;
     }
-    @keyframes fadeInSlide {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    @media (max-width: 500px) {
-      h1 {
-        font-size: 1.5rem;
-      }
-      p {
-        font-size: 1rem;
-      }
-      input[type="text"] {
-        width: 100%;
-      }
-    }
   </style>
 </head>
 <body>
@@ -97,7 +78,6 @@
   <div class="container">
     <h1>Welcome to the Annual Data Governance Training</h1>
     <p>Please enter your name to begin:</p>
-    <p id="warning">Please enter your name.</p>
     <input type="text" id="username" placeholder="Your name" />
     <button onclick="login()">Start Training</button>
   </div>
@@ -105,15 +85,16 @@
   <script>
     function login() {
       const username = document.getElementById('username').value.trim();
-      const warning = document.getElementById('warning');
       if (username) {
-        warning.style.display = 'none';
         localStorage.setItem('username', username);
         window.location.href = "governance.html";
       } else {
-        warning.style.display = 'block';
+        alert("Please enter your name");
       }
     }
+
+    // Optional: Auto-focus on input field for better UX
+    document.getElementById('username').focus();
   </script>
 
 </body>
