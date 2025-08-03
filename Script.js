@@ -1,25 +1,25 @@
-// Show username from localStorage
-const username = localStorage.getItem('username') || 'User';
-document.getElementById('greeting').textContent = `Welcome, ${username}!`;
-
-// Quiz button redirects to quiz.html
-document.getElementById('startQuizBtn').addEventListener('click', () => {
-  window.location.href = 'quiz.html';
-});
-
-// Scroll-based animation trigger
 document.addEventListener('DOMContentLoaded', () => {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('section-visible');
-      }
-    });
-  }, {
-    threshold: 0.2
+  const usernameInput = document.getElementById('username');
+  const startBtn = document.getElementById('startBtn');
+
+  usernameInput.focus();
+
+  startBtn.addEventListener('click', () => {
+    const username = usernameInput.value.trim();
+    if (username) {
+      localStorage.setItem('username', username);
+      window.location.href = "governance.html";
+    } else {
+      alert("Please enter your name");
+      usernameInput.focus();
+    }
   });
 
-  document.querySelectorAll('section').forEach(section => {
-    observer.observe(section);
+  // Optional: submit on Enter key press
+  usernameInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      startBtn.click();
+    }
   });
 });
