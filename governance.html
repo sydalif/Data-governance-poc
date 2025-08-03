@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Data Governance Training</title>
   <style>
     body {
@@ -33,14 +33,6 @@
       border-left: 5px solid #003366;
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     ul {
@@ -161,25 +153,9 @@
     const username = localStorage.getItem('username') || 'User';
     document.getElementById('greeting').textContent = `Welcome, ${username}!`;
 
-    // Animate sections on scroll (fade in)
-    const sections = document.querySelectorAll('section');
-    function showSectionsOnScroll() {
-      const triggerBottom = window.innerHeight * 0.85;
-      sections.forEach(section => {
-        const sectionTop = section.getBoundingClientRect().top;
-        if (sectionTop < triggerBottom) {
-          section.classList.add('visible');
-        }
-      });
-    }
-    window.addEventListener('scroll', showSectionsOnScroll);
-    // Initial check
-    showSectionsOnScroll();
-
     // Quiz button redirects to quiz.html
     document.getElementById('startQuizBtn').addEventListener('click', () => {
-      // Make sure quiz.html exists at the same folder level
-      window.location.href = 'quiz.html';
+      window.location.href = 'quiz.html';  // Adjust if your quiz filename differs
     });
   </script>
 
